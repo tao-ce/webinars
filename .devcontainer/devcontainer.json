@@ -1,5 +1,4 @@
 {
-    "name": "TAO Community Edition",
     "dockerFile": "../Containerfile",
 
     "remoteUser": "texlive",
