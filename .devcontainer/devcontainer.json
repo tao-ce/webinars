@@ -1,0 +1,23 @@
+{
+    "name": "TAO Community Edition",
+    "dockerFile": "../Containerfile",
+
+    "remoteUser": "texlive",
+
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils": {
+            "installZsh": true,
+            "installOhMyZsh": true,
+            "installOhMyZshConfig": true,
+            "configureZshAsDefaultShell": true
+        }
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+            ],
+        }
+    }
+}
+

@@ -1,0 +1,66 @@
+\usepackage{hyperref}
+\usepackage{dirtree}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{fontawesome}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{bigdelim}
+\usepackage{arydshln}
+\usepackage{xcolor}
+\usepackage{fancyqr}
+\usepackage{graphicx}
+\usepackage{svg}
+
+\setmonofont{Fira Code}[
+  Contextuals=Alternate,
+  Scale=.8,
+]
+\usepackage{listings}
+\usepackage{lstfiracode}
+\usepackage{menukeys}
+
+\lstset{
+    style=FiraCodeStyle,
+    basicstyle=\ttfamily\scriptsize,
+    numberstyle=\tiny,
+    stepnumber=1,
+}
+
+\usetikzlibrary{shapes.geometric, shapes.multipart, arrows}
+
+\input{macros}
+
+\title{Inside \taoce}
+\subtitle{From Source Code to Your Own Deployment}
+\author{Geoffrey Gouez}
+\institute{Open Assessment Technologies S.A.}
+\only<article>{\author[Geoffrey Gouez]{%
+Geoffrey Gouez,\\
+OSPO Technical Lead\\
+Open Assessment Technologies S.A.}}
+\date{November 19, 2026}
+
+\begin{document}
+\include{index}
+
+\part{Inside \taoce}
+\include{sections/101_dev}
+\include{sections/102_tour}
+\include{sections/103_arch}
+
+\part{Hands On}
+\include{sections/204_build}
+\include{sections/205_run}
+\include{sections/206_playground}
+
+\part{Wrap Up}
+\include{sections/307_summary}
+\include{sections/308_beyond}
+
+\only<presentation>{\include{sections/999_question}}
+
+\only<article>{\appendix \include{sections/999_appendix}}
+
+\end{document}

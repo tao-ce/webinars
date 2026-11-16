@@ -1,0 +1,30 @@
+\documentclass[12pt,c]{beamer}
+\usepackage{taocolors}
+\usepackage{beamercolorthemetao}
+
+\useoutertheme{infolines}
+\usecolortheme{tao}
+
+\setbeamerfont{headline}{size=\fontsize{10}{12}\selectfont}
+\setbeamertemplate{footline}{%
+\begin{beamercolorbox}{section in head/foot}
+    \hfill%
+    \insertframenumber / \insertmainframenumber
+    % \insertframenumber / \inserttotalframenumber
+    \hspace{.1\textwidth}
+    \vspace{0.5em}
+\end{beamercolorbox}
+}
+
+\setbeamertemplate{section in toc}[square]
+\setbeamertemplate{subsection in toc}[subsections unnumbered]
+
+\AtBeginSection[]{%
+\begin{frame}[plain]
+\tableofcontents[sections=\thesection]
+\end{frame}
+}
+
+\newcommand{\notcovered}{\textsuperscript{\fontsize{4}{5}{\faForward}}}
+
+\input{document}

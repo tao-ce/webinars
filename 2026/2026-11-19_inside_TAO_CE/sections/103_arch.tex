@@ -1,0 +1,141 @@
+\section{\taoce Architecture}
+\subsection{Technical Stack}
+
+\begin{frame}
+    \small
+
+    \begin{tabular}{r@{} l@{} r@{} l@{} r p{.4\textwidth} l@{}}
+        \uncover<7->{
+        \multirow{5}{*}{\begin{sideways}\scriptsize Swift\end{sideways}} & \ldelim\{{5}{*}
+        }
+            & \multirow{2}{*}{\begin{sideways}\scriptsize Crystal\end{sideways}} & \ldelim\{{2}{*}
+            & \alert{Applications} 
+            & \scriptsize Portal, Deliver, Construct, \dots
+            % & \rdelim\uparrow{11}{*}{}
+            \\
+    
+        & & &
+            & \alert{Internal applications\notcovered}
+            & \scriptsize EM, datastore, dynamic-query, \dots
+        \\
+        \\
+        \uncover<6->{
+        & & \multirow{4}{*}{\begin{sideways}\scriptsize Devcontainer\end{sideways}} & \ldelim\{{4}{*}
+        }
+        \uncover<5->{
+            & \alert{Runtime toolchain}
+            & \scriptsize Caddy, PHP, NodeJS, Go, Jsonnet
+        }
+        \\
+        \uncover<4->{
+        & & &
+            & \alert{Base container\notcovered}
+            & \scriptsize Fedora, SystemD
+        }
+        \\
+        \\
+        \uncover<3->{
+        & & & 
+            & \alert{Build toolchain}
+            & \scriptsize Taskfile, Buildah, Podman
+        }
+        \\
+        \\
+        \uncover<2->{
+        & & &
+            & \alert{Build dependencies\notcovered}
+            & \scriptsize Verdaccio, Satis
+        }
+        \\
+        \uncover<2->{
+        & & & 
+            & \alert{Runtime dependencies\notcovered} 
+            & \scriptsize ElasticSearch, GCP PubSub, GCP Firestore, PostgreSQL, Valkey
+        }
+        \\
+        \\
+    \end{tabular}
+
+    \only<article>{%
+    We will briefly review each component from bottom to top.
+    }
+\end{frame}
+
+
+\subsection<article>{Runtime Dependencies}
+\begin{frame}<article>\small
+    \only<article>{%
+    \taoce requires few services to be deployed. 
+    All those services are deployed from
+    \href{https://github.com/tao-ce/tao-ce/blob/main/docker-compose.stack.yml}{\texttt{Docker compose}}
+    or from \href{https://github.com/tao-ce/cozy/tree/main/root/etc/containers/systemd}{\texttt{quadlet}}
+    before \taoce container image is started.
+    }
+    \begin{description}
+        \item[\href{https://www.elastic.co/elasticsearch/}{Elasticsearch}] is the main database for \taoce services.
+        \item[\href{https://valkey.io/}{Valkey}] (replacing Redis) is used for application caching.
+        \item[\href{https://cloud.google.com/pubsub/docs}{GCP PubSub}] allows communication between internal services. \taoce relies on a local emulator.
+        \item[\href{https://cloud.google.com/firestore/docs}{GCP Firestore}] is used as cache for some background applications. It is also deployed as a local emulator.
+        \item[\href{https://www.postgresql.org/}{PostgreSQL}] offers structure database for few \taoce services.
+    \end{description}
+\end{frame}
+
+\subsection<article>{Build Dependencies}
+\begin{frame}<article>
+    \only<article>{%
+    Those services will be deployed as side containers to support building activities. They are not required for runtime.
+    }
+    \begin{description}
+        \item[\href{https://verdaccio.org/}{Verdaccio}] is a local NPM registry where few NodeJS packages will be pushed when locally built.
+        \item[\href{https://github.com/composer/satis}{Satis}] is a local Composer registry where few PHP packages will be pushed when locally built.
+    \end{description}
+\end{frame}
+
+
+\subsection{Build Toolchain}
+\begin{frame}
+    \only<article>{%
+    The following tools are embedded in \taoce \devcontainer.
+    }
+    \begin{description}
+        \item[\href{https://taskfile.dev/}{Taskfile}] Steps are structured using \texttt{Taskfile} to support build, deployment and runtime activities.
+        \item[\href{https://buildah.io/}{Buildah}] Building \taoce services is performed in isolated context with \texttt{Buildah}.
+        \item[\href{https://podman.io/}{Podman}] \texttt{Buildah} relies on \texttt{Podman} to manage container images.
+    \end{description}
+\end{frame}
+
+
+\subsection<article>{Base Container}
+\begin{frame}<article>
+    \begin{description}
+        \item[\href{https://fedoraproject.org/}{Fedora}] \taoce is shipped in a container built from \texttt{Fedora Linux}.
+        \item[\href{https://systemd.io/}{SystemD}] Services orchestration and lifecycle are managed through \texttt{SystemD}; a standard central part of modern Linux system.
+    \end{description}
+\end{frame}
+
+\subsection{Runtime Toolchain}
+\begin{frame}
+    \only<article>{%
+    The following tools are embedded in \taoce \devcontainer and runtime image.
+    }
+    \begin{description}
+        \item[\href{https://caddyserver.com/}{Caddy}] Static contents for \taoce are served using \texttt{Caddy}.
+        \item[\href{https://jsonnet.org/}{Jsonnet}] Jsonnet is used to generate configuration files for \taoce services.
+        \item[\href{https://www.php.net/}{PHP}] \taoce has historically been built with \texttt{PHP}. 
+        \item[\href{https://nodejs.org/}{NodeJS}] Several services are built with \texttt{Javascript} \& \texttt{Typescript}.
+        \item[\href{https://go.dev/}{Go}] Finally, there are few services using \texttt{Go} language.
+    \end{description}
+\end{frame}
+
+\subsection<article>{Internal Applications}
+\begin{frame}<article>
+    \only<article>{%
+    The following applications are dedicated to internal activities and development
+    }
+    \begin{description}
+        \item[EM] (aka. Environment Management) supports authentication and autorization using \texttt{\href{https://jwt.io/}{JWT}} across all \taoce services.
+        \item[LTI Devkit] provides tools to experiment with LTI capabilities in \taoce.
+        \item[backend services\notcovered] \scriptsize \texttt{content-service}, \texttt{datastore}, \texttt{dynamic-query}, \texttt{task-orchestrator}, \texttt{timers}
+    \end{description}
+\end{frame}
+

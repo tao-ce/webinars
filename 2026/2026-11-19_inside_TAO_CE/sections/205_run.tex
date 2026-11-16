@@ -1,0 +1,67 @@
+\section{Run \taoce}
+
+\subsection{Initialization}
+\begin{frame}
+    \alert{SystemD} is used to manage \taoce services, and therefore is the first process started in container.
+
+    \begin{description}
+        \item[devcontainer] SystemD will not start any service, as they are not built yet.
+        \item[tao-ce] SystemD will \begin{enumerate} 
+            \item check if configuration already exists, if not it will generate it,
+            \item start the reverse-proxy,
+            \item start the application services, which will initialize themselves.
+        \end{enumerate} 
+    \end{description}
+\end{frame}
+
+\subsection<article>{Reverse-Proxy \& Static content}
+\begin{frame}<article>
+    \alert{Caddy} is used as a reverse-proxy to expose applications as a single endpoint. It is also used to serve static content.
+\end{frame}
+
+\subsection{Applications configuration}
+\begin{frame}
+    Configuration files are generated at first start of container with \alert{Jsonnet}.
+
+\only<article>{
+    Those configuration files can be:
+    \begin{itemize}
+        \item environment variables,
+        \item application specific configuration,
+        \item TLS certificates,
+        \item \dots
+    \end{itemize}
+}
+
+    To modify applications configuration:
+    \begin{itemize}
+        \item[\faBan] avoid to edit configuration files manually, as they will be overwritten by the next start of the container,
+        \item[\faCheck] in \devcontainer, you can directly edit \href{https://github.com/tao-ce/tao-ce/tree/main/libexec/setup}{their templates}, and apply changes with \texttt{dev:setup} task.
+        \item[\faCheck] in tao-ce container, you can patch their templates from \texttt{/usr/local/libexec/tao-ce/setup} directory, and rebuild the container.
+    \end{itemize}
+\end{frame}
+
+\subsection{Applications services}
+\begin{frame}[fragile]
+    Each application is composed of a set of services to be run. They are registered as \alert{systemd units}, and named after the application, e.g.:
+    \begin{itemize}
+        \item \texttt{tao-ce.portal.backend.service}
+        \item \texttt{tao-ce.portal.bootstrap.service}
+        \item \texttt{tao-ce.portal.worker.service}
+        \item \texttt{tao-ce.deliver.backend.service}
+        \item \texttt{tao-ce.deliver.bootstrap.service}
+        \item \texttt{tao-ce.deliver.worker.service}
+        \item \dots
+    \end{itemize}
+
+    You can find services in \taocerepo \texttt{apps/<app>/meta/systemd} directory of each application.
+
+\begin{onlyenv}<article>
+You can list all services with the following command:
+\begin{lstlisting}
+systemctl -a | grep tao-ce
+\end{lstlisting}
+\end{onlyenv}
+\end{frame}
+
+

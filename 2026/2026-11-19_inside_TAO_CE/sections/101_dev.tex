@@ -1,0 +1,121 @@
+\section{Quickstart}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{What is \taoce}
+\begin{frame}
+    \taoce is an open-source platform developed by \OATSA for online testing and assessment.
+    \only<article>{%
+        \TAOCE has been released in january 2026, and a new version has been released in september.
+
+        The platform is published as container images, and can run on different systems, like laptop, virtual machines or even Raspberry Pi.
+
+        The following applications support core features of \taoce
+    }
+\pause
+    \begin{description}
+        \item[Portal] Central gateway of \taoce, to manage users, groups, sessions, \dots
+        \pause
+        \item[Deliver] (aka. Testrunner) is where test-takers will attend their sessions.
+        \pause
+        \item[Proctoring] (aka. Monitoring) is a parallel service to monitor and control test sessions.
+        \pause
+        \item[Scoring] (aka. Grader) can be used to support manual scoring sessions.
+        \pause
+        \item[Construct] (aka. Authoring) is the historical platform for TAO Core. In \taoce, it offers an authoring interface to create QTI items and tests. 
+    \end{description}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\TAOCE Applications \& Flavors}
+\newcommand{\flyes}{\alert{\faCheckCircle}}
+\begin{frame}[fragile]
+    \only<article>{%
+        \taoce come in different set of applications, called \alert{flavors} to match different use-cases.
+    }
+    \begin{center}
+        \begin{tabular}{l | c c c}
+            & \scriptsize\texttt{full}
+            & \scriptsize\texttt{essential}
+            & \scriptsize\texttt{lite}
+            \\
+            \hline
+            Proctoring      & \flyes & & \\
+            Scoring         & \flyes & & \\
+            Construct       & \flyes & \flyes \\
+            LTI Devkit      & \flyes & \flyes \\
+            Portal          & \flyes & \flyes & \flyes \\
+            Deliver         & \flyes & \flyes & \flyes \\
+            EM \& internal  & \flyes & \flyes & \flyes \\
+        \end{tabular}
+
+        \vspace*{2em}
+        We will focus on the \alert{lite} flavor for this presentation.
+    \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{How we design \taoce}
+\begin{frame}
+    \taoce is composed in three layers:
+
+    \begin{columns}[T]
+        \begin{column}{.3\textwidth}\begin{center}
+            \vspace{1em}
+            \begin{figure}[!htb]
+                \begin{tikzpicture}[scale=2]
+                    \draw<1->[thick,tao-blue!90] (0.667,0.577) -- (1.333,0.577) -- (1,1.155) -- cycle;
+                    \draw<2->[thick,tao-blue!70] (0.333,0.289) -- (1.667,0.289) -- (1,1.443) -- cycle;
+                    \draw<3->[thick,tao-blue!50] (0,0) -- (2,0) -- (1,1.732) -- cycle;
+                    \draw[thick,transparent] (0,0) -- (2,0) -- (1,1.732) -- cycle;
+
+                    \node<1->[font=\scriptsize] at (1, 0.666) {Crystal};
+                    \node<2->[font=\scriptsize] at (1, 0.433) {Swift};
+                    \node<3->[font=\scriptsize] at (1, 0.145) {Cozy};
+                \end{tikzpicture}
+            \end{figure}
+        \end{center}\end{column}
+        \begin{column}{.7\textwidth}
+            \begin{description}
+                \item<1->[Crystal] the set of \taoce applications built from sources
+                \item<2->[Swift] the packaging of \alert{Crystal} as container images
+                \item<3->[Cozy\notcovered] an appliance to run container from \alert{Swift} in a Virtual Machine or on Bare Metal
+            \end{description}
+        \end{column}
+    \end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Start Development Environment}
+\begin{frame}[fragile]
+    \only<article>{%
+        \taoce is built in an isolated container environment, called \devcontainer\notcovered.
+    }
+    % \bigicon{\faPlayCircle}
+    \begin{description}
+        \item[Get code] \,
+            \begin{lstlisting}
+git clone \
+  --recurse-submodules \
+  git@github.com:tao-ce/tao-ce.git
+\end{lstlisting}
+        \item[Enter \devcontainer\notcovered] \, \\
+            In Visual Studio Code \\
+            \keys{\ctrl + \shift + P} Dev Containers: Reopen in Container
+        \item[Build \& Run] \, \\
+            \begin{lstlisting}
+# Limit scope to lite flavor
+export CE_FLAVOR=lite
+# Build & run TAO CE from devcontainer
+task dev:up
+\end{lstlisting}
+    \end{description}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% After few minutes, a container with the complete toolchain to build \taoce Applications and Images will be ready.\\
+
+% \bigicon{\faHourglass}
+
+% We will not cover in details how Devcontainers are working. For more information:
+% \begin{itemize}
+%     \item \href{https://containers.dev/}{Development Containers website}
+%     \item \href{https://github.com/tao-ce/tao-ce/blob/main/.devcontainer/devcontainer.json}{\TAOCE \devcontainer}
+% \end{itemize}
+
+% \end{frame}
