@@ -1,0 +1,88 @@
+\usepackage{taocolors}
+\usepackage{beamercolorthemetao}
+\usepackage[OT1]{fontenc}
+\usepackage[quiet]{fontspec}
+\usepackage[cachedir=minted_presentation]{minted}
+\usemintedstyle{taodark}
+\setsansfont{Open Sans Light}[
+    Ligatures=Common,%
+    Numbers={SlashedZero,OldStyle},%
+]
+\setmonofont{IBM Plex Mono Light}[%
+    Scale=.6,%
+    Ligatures=Common,%
+    Number={SlashedZero,OldStyle},%
+]
+
+\useoutertheme{infolines}
+\usecolortheme{tao}
+\setbeamerfont{author}{shape=\itshape}
+\setbeamerfont{headline}{size=\fontsize{9}{11}\selectfont}
+
+\setbeamertemplate{headline}{%
+    \hbox{%
+        \usebeamerfont{section in head/foot}%
+        \begin{beamercolorbox}[bgopacity=.3,wd=.5\paperwidth,ht=2.65ex,dp=1.5ex,right]{section in head/foot}%
+            \usebeamerfont{headline}\usebeamerfont{section in head/foot}\usebeamertemplate{section in head/foot}\hspace*{2ex}
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[bgopacity=.3,wd=.5\paperwidth,ht=2.65ex,dp=1.5ex,left]{subsection in head/foot}%
+            \usebeamerfont{headline}\usebeamerfont{subsection in head/foot}\hspace*{2ex}\usebeamertemplate{subsection in head/foot}
+        \end{beamercolorbox}%
+    }%
+    \vskip0pt%
+}
+
+\setbeamertemplate{footline}{%
+\begin{beamercolorbox}[bgopacity=.2]{section in head/foot}%
+    \vskip2pt
+    \hspace{1em}
+    \inserttitle
+    \hfill%
+    \insertframenumber / \insertmainframenumber
+    \hspace{1em}
+    \vskip2pt
+\end{beamercolorbox}
+}
+\setbeamertemplate{section in toc}[square]
+\setbeamertemplate{subsection in toc}[subsections unnumbered]
+
+\setbeamertemplate{background canvas}{%
+    \tikzfading[name=fade out,
+            inner color=transparent!0,
+            outer color=transparent!100]
+    \begin{tikzpicture}[remember picture,overlay]
+        \fill[black] (current page.south west) rectangle (current page.north east);
+        \shade[
+            shading=radial,
+            path fading=fade out,
+            inner color=tao-red!50!black,
+            outer color=tao-yellow!30!tao-blue,
+            opacity=1,
+            ] ([xshift=.3\textwidth,yshift=-.2\textwidth]current page.north west) circle (\textwidth);
+        \shade[
+            shading=radial,
+            path fading=fade out,
+            inner color=tao-blue!50!black,
+            outer color=tao-blue,
+            opacity=.6,
+            ] ([xshift=.2\textwidth,yshift=.3\textwidth]current page.south west) circle (\textwidth);
+        \shade[
+            shading=radial,
+            path fading=fade out,
+            inner color=tao-red!30!tao-yellow,
+            outer color=tao-red,
+            opacity=.6,
+            ] ([xshift=-.3\textwidth,yshift=-.4\textwidth]current page.north east) circle (\textwidth);
+        \fill[black, opacity=.7] (current page.south west) rectangle (current page.north east);
+    \end{tikzpicture}%
+}
+
+\renewcommand{\emph}[1]{\alert{#1}}
+
+
+\AtBeginSection[]{%
+\begin{frame}[plain]
+\tableofcontents[sections=\thesection]
+\end{frame}
+}
+

@@ -1,0 +1,5 @@
+services:
+  tao:
+    build:     # replace image by build
+      context: .
+      dockerfile: "my.taoce.Containerfile"

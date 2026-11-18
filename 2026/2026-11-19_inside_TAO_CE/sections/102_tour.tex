@@ -1,15 +1,17 @@
 \section{Tour of \taoceorg Repositories}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Notice}
 \begin{frame}
     \taoce is continuously improving, and the following slides can be considered accurate as-of today.\\
    
     \bigicon{\faRefresh}
 
-    To enhance performance \& experiences of \taoce, major changes in \taoceorg repositories may happen in the future.
+    To enhance performance \& experiences of \TAOCE, major changes in \taoceorg repositories may happen in the future.
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\taoceorg Applications \& Packages}
-\begin{frame}[fragile]
+\begin{frame}[fragile=singleslide]
     \only<article>{%
         \taoceorg repositories are organized as submodules. Therefore, applications and packages are split into separate repositories.
         An application may need one to many repositories to be built, and may depends on packages.
@@ -22,45 +24,10 @@
     Currently, \taocerepo loads \alert{34} repositories as Git submodules.
 
 \begin{onlyenv}<article>
-    You can list all submodules with the following command:
-\begin{lstlisting}
-git submodule status
- b062e19df1901b2c4c94cfef2684e56f49c9f235 apps/content-service/src (2026.05.0-rc3)
- 77b55c78fdb28433212c7e6f20ae1a0397b6e3a5 apps/datastore/src (2026.05.0-rc3)
- 8e3040320148173c3992e0e926551477cace8854 apps/deliver/src/be (2026.05.0-rc3)
- 84c7cc8934fc640b88cb5d05ad84d826d1d24241 apps/deliver/src/fe (2026.05.0-rc3)
-+16d0999ec6d046c546e331f81ed635d9b29f4baa apps/devkit/src (tao-ce/2026.05.0)
- 4ea18d07049b3d650ba2007295a7fd4ae6847026 apps/dynamic-query/src (2026.05.0-rc3)
- 070eb71b3e6edbdb4b390e92284b914ca45d1130 apps/environment-management/src (2026.05.0-rc3)
- 3bd33d6c6ded174f26410a3d4c60c73adbda8a62 apps/portal/src (2026.05.0-rc3)
- 864037f1a8dd3efe06cf7585fc740f07fd1dee2f apps/proctoring/src (2026.05.0-rc3)
- 11c99a0b5670b7990fc7f4d5198001d0e8f03998 apps/scoring/src/tao-manual-scoring-be (2026.05.0-rc3)
- 41f8d7f5ea9ccfa0d699b6de8dbb72a47784cc29 apps/scoring/src/tao-manual-scoring-fe (2026.05.0-rc3)
- c2f17bc302b05ddc3892353ac92ab943b1788ae1 apps/scoring/src/tao-scoring-service-be (2026.05.0-rc3)
- ffb27a5e70b18080f8b0ca395d3864f95c5522ae apps/task-orchestrator/src (2026.05.0-rc3)
- cca41d21dbabb581fe2c1f0bd7b32a61c37a999f apps/timers/src (2026.05.0-rc3)
- 84b649dde6377102e90ee322e0cc4ef6cec0471d packages/bundle-cache-document-manager (2026.05.0-rc3)
- 0e7518eb02d6915df2b851975f5992d8a218c760 packages/bundle-correlation-ids (2026.05.0-rc3)
- 1ac801d8943f3894f40972645d60a61defaa80dc packages/bundle-document-manager (2026.05.0-rc3)
- e9e1ec22743338ab8f3ee448bb1e1c1211cc16fd packages/bundle-elasticsearch-document-manager (2026.05.0-rc3)
- 214b1ae6ed38d100ead6afaea2deed2c0064ed6c packages/bundle-filesystem-document-manager (2026.05.0-rc3)
- 6e6d62622b3fb2a6c494fd46bdb137eb923a943f packages/bundle-grader-messenger-bridge (2026.05.0-rc3)
- 385dbabf7e967f452df3878c11c885224deace74 packages/bundle-qti (2026.05.0-rc3)
- 274fe8a4df23b30b4bc55fc9276ebd13cbe70422 packages/bundle-scoring-engine (2026.05.0-rc3)
- 1d2650653b308b56632c8b6f581452aa092cf5cb packages/extension-tao-deliver-connect (2026.05.0-rc3)
- 61925f5bfe6b78b84c246bff9976f560efe407ec packages/extension-tao-deliver-pcis (2026.05.0-rc3)
- b38d759db7250983b7bc6b5a24c67013fb86ac46 packages/extension-tao-test-preview-ui-loader (2026.05.0-rc3)
- bce72f0566bf6983580f4e5e60acf86d01d1fdcf packages/extension-tao-testqti-export (2026.05.0-rc3)
- 523a8162bd5476717b589e7c2e89cc9ec24ee4e9 packages/lib-correlation-ids-http-client (2026.05.0-rc3)
- 09ba4653d57882ffe5d0f1cdeb32262657c2df50 packages/lib-correlation-ids-messenger (2026.05.0-rc3)
- 224f2c88901c3b1ad5fc990090f621c31b7785a1 packages/lib-grader-messenger-bridge (2026.05.0-rc3)
- 29340b76ba1d84c33f60f5c9d4bad3d5e99f284c packages/lib-qti-item-json-compilation (2026.05.0-rc3)
- 355f5e901b6e8b944521146ac9fa226b25a9a5e8 packages/lib-tenant-management (2026.05.0-rc3)
- 148dea7531c57317de8018302922ad60762c0400 packages/live-design-system (2026.05.0-rc3)
- f4dbaee3be0525531308eb3c8fe92e51cff1afb2 packages/read-aloud-client-fe (2026.05.0-rc3)
- ea22600468991216978910401b96671857bb0cf1 packages/tao-timers-client (2026.05.0-rc3)
-\end{lstlisting}
+You can list all submodules with the following command:
+\inputminted[fontsize=\scriptsize]{text}{./snippets/git-submodule.txt}
 \end{onlyenv}
+
 \begin{onlyenv}<presentation>
     \begin{columns}[T]
         \scriptsize
@@ -86,72 +53,90 @@ git submodule status
 \end{onlyenv}
 \end{frame}
 
-\renewcommand*\DTstylecomment{\scriptsize\sffamily}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\taocerepo Structure}
-\begin{frame}
+\begin{frame}[t,fragile]
 \only<article>{%
     \taocerepo repository is structured as a \textit{monorepo} to gather all \taoce code, in a single file-tree.
 }
-
-\dirtree{%
-    .1 tao-ce/\pause.
-    .2 apps/.
-    .3 portal/.
-    .4 src\DTcomment{\taocerepo[tao-portal] submodule}.
-    .3 deliver/.
-    .4 src/.
-    .5 fe\DTcomment{\taocerepo[tao-deliver-fe] submodule}.
-    .5 be\DTcomment{\taocerepo[tao-deliver-be] submodule}.
-    .3 \dots/\DTcomment{other TAO CE apps}\pause.
-    .2 packages/.
-    .3 \dots/\DTcomment{TAO CE libraries}\pause.
-    .2 build/.
-    .2 etc/.
-    .2 docs/.
-    .2 libexec/.
-    .2 \dots.
-}
-
+\begin{dirtreex}[box={false},fontsize=\small]
+    \dir{tao-ce}{}{
+        \dir{apps}{}{
+        \only<2->{
+            \dir{portal}{}{ \dir{src}{\sffamily\taocerepo[tao-portal] submodule}{} }
+            \dir{deliver}{}{
+                \dir{src}{}{
+                    \dir{fe}{\sffamily\taocerepo[tao-deliver-fe] submodule}{}
+                    \dir{be}{\sffamily\taocerepo[tao-deliver-be] submodule}{}
+            }}
+            \dir{\dots}{\sffamily other \TAOCE apps}{}
+        }}
+        \dir{packages}{}{
+        \only<3->{
+            \dir{\dots}{\sffamily \TAOCE libraries}{}
+        }}
+        \only<4->{
+        \dir{build}{}{}
+        \dir{etc}{}{}
+        \dir{docs}{}{}
+        \dir{libexec}{}{}
+        \dir{\dots}{}{}
+        }
+    }
+\end{dirtreex}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Build Resources}
-\begin{frame}
+\begin{frame}[t]
 \only<article>{%
     The \texttt{build} directory contains resources separated in stages, related to artifacts we intend to build.
 }
-\dirtree{%
-    .1 tao-ce/.
-    .2 build/.
-    .3 crystal/\DTcomment{Build TAO CE from sources}.
-    .4 Containerfile.d/\DTcomment{Containerfile fragments}.
-    .3 swift/\DTcomment{Build TAO CE images}.
-    .3 docs/\DTcomment{Build \href{https://tao-ce.github.io/tao-ce}{TAO CE docs}}.
-    .3 \dots.
-    .2 Containerfile\DTcomment{Base container image}.
-    .2 Taskfile.yml\DTcomment{Build and operation tasks}.
-    .2 \dots.
-}
-
+\begin{dirtreex}[box={false},fontsize=\small]
+    \dir{tao-ce}{}{
+        \dir{build}{}{
+            \dir{crystal}{\sffamily Build \TAOCE from sources}{
+                \dir{Containerfile.d}{\sffamily Containerfile fragments}{}
+            }
+            \dir{swift}{\sffamily Buid \TAOCE images}{}
+            \dir{docs}{\sffamily Build \href{https://tao-ce.github.io/tao-ce}{TAO CE docs}}{}
+            \dir{\dots}{}{}
+        }
+        \file{Containerfile}{\sffamily Base container image}
+        \file{Taskfile.yml}{\sffamily Build and operation tasks}
+        \file{\dots}{}
+    }
+\end{dirtreex}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Runtime Resources}
-\begin{frame}
-    \dirtree{%
-    .1 tao-ce/.
-    .2 etc/.
-    .3 tao-ce/config/.
-    .4 Caddyfile\DTcomment{Main endpoint configuration}.
-    .4 tao.yaml\DTcomment{Main \TAOCE configuration}\pause.
-    .2 libexec/.
-    .3 init/portal/\DTcomment{Default Portal users}.
-    .3 setup/\DTcomment{Configuration templates}.
-    .3 systemd/\DTcomment{Systemd services}.
-    .3 \dots.
-}
+\begin{frame}[t]
+\begin{dirtreex}[box={false},fontsize=\small]
+    \dir{tao-ce}{}{
+        \dir{etc}{}{
+        \only<2->{
+            \dir{tao-ce}{}{
+                \dir{config}{}{
+                    \file{Caddyfile}{\sffamily Main endpoint configuration}
+                    \file{tao.yaml}{\sffamily Main \TAOCE configuration}
+                }
+            }
+        }}
+        \dir{libexec}{}{
+            \only<3->{
+            \dir{init/portal}{\sffamily Default Portal users}{}
+            \dir{setup}{\sffamily Configuration templates}{}
+            \dir{systemd}{\sffamily Systemd services}{}
+            \dir{\dots}{}{}
+        }}
+    }
+\end{dirtreex}
 \end{frame}
 
-\subsection{\taocerepo Documentation}
-\begin{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection<article>{\taocerepo Documentation}
+\begin{frame}<article>
     \bigicon{\faBook}
 \begin{itemize}
     \item \url{https://tao-ce.github.io/tao-ce/}

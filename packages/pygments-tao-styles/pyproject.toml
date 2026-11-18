@@ -1,0 +1,16 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pygments-tao-styles"
+version = "0.0.1"
+dependencies = ["pygments"]
+
+
+[project.entry-points."pygments.styles"]
+taodark = "tao:TAODarkStyle"
+taolight = "tao:TAOLightStyle"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["tao.py"]

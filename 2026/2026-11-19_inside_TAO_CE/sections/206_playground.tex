@@ -1,18 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Playground}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Add Translation}
-\begin{frame}[fragile]
+\begin{frame}[fragile=singleslide]
     \begin{description}
     \item[Goal] Edit translation in \alert{Portal} application.
     \item[How]  Change desired string in \href{https://github.com/tao-ce/tao-portal/blob/3bd33d6c6ded174f26410a3d4c60c73adbda8a62/frontend/src/locale/en-US/messages.po#L1215-L1217}{\texttt{locale}} file
-    \item[Rebuild] \,\begin{lstlisting}
-task apps:portal:up
-\end{lstlisting}
+    \item[Rebuild] \, \inputminted{bash}{./snippets/apps-portal-up.sh}
     \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Look \& Feel}
-\begin{frame}[fragile]
+\begin{frame}[fragile=singleslide]
     \begin{description}
     \item[Goal] Change logo in \alert{Portal} application.
     \item[How] \begin{enumerate}
@@ -20,43 +19,17 @@ task apps:portal:up
         \item Edit \texttt{portal.configuration} in \href{https://github.com/tao-ce/tao-ce/blob/837b29614f205a40918327fa478b5c0170e5b6d1/libexec/setup/apps/files/environments.libsonnet#L19-L21}{\texttt{environments.libsonnet}}
         \item Change \texttt{logoImage}
     \end{enumerate}
-    \item[Rebuild] \,\begin{lstlisting}
-# Apply change in config templates, and regenerate config files
-task dev:setup
-# Restart EM services
-systemctl restart tao-ce.env\*
-\end{lstlisting}
+    \item[Rebuild] \, \inputminted{bash}{./snippets/dev-setup.sh}
     \end{description}
 
 \begin{onlyenv}<article>
 Example of \texttt{portal.configuration} value:
-
-\begin{lstlisting}
-{
-  name: 'portal.configuration',
-  value: std.manifestJsonMinified({
-    backgroundImage: "assets/image.png",
-    locale: setup.defaultLocale ,
-    backgroundImageVeil: "blue2red",
-    corporateText: "We are currently exploring how we can perform light customizations to TAO CE Portal",
-    corporateTitle: "Thanks for attending TAO CE Webinar!",
-    defaultCurrency: "EUR",
-    defaultTimeZone: "Europe/Luxembourg",
-    linkVisibility: true,
-    logoImage: "assets/mylogo.png",
-    productName: "TAO Portal",
-    selfRegistrationLink: { },
-    ssoProviders: [ ],
-    templates: [ ],
-    title: "Log in to TAO",
-  }),
-},
-\end{lstlisting}
+\inputminted[fontsize=\scriptsize]{jsonnet}{./snippets/portal-config.jsonnet}
 \end{onlyenv}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Benchmark \taoce}
-\begin{frame}[fragile]
+\begin{frame}[fragile=singleslide]
     \begin{description}
     \item[Goal] Ensure \taoce can support 100 concurrent test-takers
     \item[How] \, \begin{enumerate}
@@ -64,44 +37,21 @@ Example of \texttt{portal.configuration} value:
         \item assign a session
         \item run benchmark in \href{https://github.com/tao-ce/tao-ce/tree/main/tests/load}{\texttt{tests/load} directory}
     \end{enumerate}
-    \item[Run] \,\begin{lstlisting}
-. ./.venv/bin/activate
-locust \
-    -H https://community.tao.internal \
-    --load_profile 'Light (100u)' \
-    --wait_time 'Fast (0.5-2s)' \
-    --ramp_method normal --ramp_duration 30
-\end{lstlisting}
+    \item[Run] \, \inputminted{bash}{./snippets/locust.sh}
     \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Do you even need to rebuild?}
-\begin{frame}[fragile]
-    \only<article>{%
-    \taoce being shipped as container images, you can take advantage of existing images.
-    }
+\begin{frame}[fragile=singleslide]
+    \only<article>{\taoce being shipped as container images, you can take advantage of existing images.}
     \begin{description}
     \item[Goal] Apply minor changes to \taoce configuration, without complete rebuild.
     \item[How] \, \begin{enumerate}
-        \item create a new \texttt{my.taoce.Containerfile} file \begin{lstlisting}
-FROM quay.io/tao-ce/tao-ce:lite
-
-COPY path/to/my/changes \
-    /usr/local/libexec/tao-ce/...
-RUN my/custom/script.sh ...
-\end{lstlisting}
-        \item use it in \href{https://github.com/tao-ce/tao-ce/blob/837b29614f205a40918327fa478b5c0170e5b6d1/docker-compose.yml#L9}{\texttt{docker-compose.yml}}  \begin{lstlisting}
-services:
-  tao:
-    build:     # replace image by build
-      context: .
-      dockerfile: my.taoce.Containerfile
-\end{lstlisting}
+        \item create a new \texttt{my.taoce.Containerfile} file \inputminted{Dockerfile}{./snippets/my.taoce.Containerfile}
+        \item use it in \href{https://github.com/tao-ce/tao-ce/blob/837b29614f205a40918327fa478b5c0170e5b6d1/docker-compose.yml#L9}{\texttt{docker-compose.yml}}
+    \inputminted{yaml}{./snippets/dc.yaml}
     \end{enumerate}
-    \item[Reinstall] \,\begin{lstlisting}
-docker compose down -v
-docker compose up -d
-\end{lstlisting}
+    \item[Reinstall] \mintinline{bash}{docker compose down -v && docker compose up -d}
     \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

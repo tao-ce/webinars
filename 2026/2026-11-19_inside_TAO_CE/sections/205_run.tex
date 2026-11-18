@@ -1,5 +1,6 @@
 \section{Run \taoce}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Initialization}
 \begin{frame}
     \alert{SystemD} is used to manage \taoce services, and therefore is the first process started in container.
@@ -14,11 +15,13 @@
     \end{description}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection<article>{Reverse-Proxy \& Static content}
 \begin{frame}<article>
     \alert{Caddy} is used as a reverse-proxy to expose applications as a single endpoint. It is also used to serve static content.
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Applications configuration}
 \begin{frame}
     Configuration files are generated at first start of container with \alert{Jsonnet}.
@@ -41,8 +44,9 @@
     \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Applications services}
-\begin{frame}[fragile]
+\begin{frame}[fragile=singleslide]
     Each application is composed of a set of services to be run. They are registered as \alert{systemd units}, and named after the application, e.g.:
     \begin{itemize}
         \item \texttt{tao-ce.portal.backend.service}
@@ -57,10 +61,7 @@
     You can find services in \taocerepo \texttt{apps/<app>/meta/systemd} directory of each application.
 
 \begin{onlyenv}<article>
-You can list all services with the following command:
-\begin{lstlisting}
-systemctl -a | grep tao-ce
-\end{lstlisting}
+You can list all services with the following command: \mint{bash}{systemctl -a | grep tao-ce}
 \end{onlyenv}
 \end{frame}
 

@@ -14,19 +14,19 @@
     \begin{description}
         \item[Portal] Central gateway of \taoce, to manage users, groups, sessions, \dots
         \pause
-        \item[Deliver] (aka. Testrunner) is where test-takers will attend their sessions.
+        \item[Deliver] \aka{Testrunner} is where test-takers will attend their sessions.
         \pause
-        \item[Proctoring] (aka. Monitoring) is a parallel service to monitor and control test sessions.
+        \item[Proctoring] \aka{Monitoring} is a parallel service to monitor and control test sessions.
         \pause
-        \item[Scoring] (aka. Grader) can be used to support manual scoring sessions.
+        \item[Scoring] \aka{Grader} can be used to support manual scoring sessions.
         \pause
-        \item[Construct] (aka. Authoring) is the historical platform for TAO Core. In \taoce, it offers an authoring interface to create QTI items and tests. 
+        \item[Construct] \aka{Authoring} is the historical platform for TAO Core. In \taoce, it offers an authoring interface to create QTI items and tests. 
     \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{\TAOCE Applications \& Flavors}
 \newcommand{\flyes}{\alert{\faCheckCircle}}
-\begin{frame}[fragile]
+\begin{frame}
     \only<article>{%
         \taoce come in different set of applications, called \alert{flavors} to match different use-cases.
     }
@@ -82,28 +82,16 @@
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Start Development Environment}
-\begin{frame}[fragile]
+\begin{frame}[fragile=singleslide]
     \only<article>{%
         \taoce is built in an isolated container environment, called \devcontainer\notcovered.
     }
-    % \bigicon{\faPlayCircle}
     \begin{description}
-        \item[Get code] \,
-            \begin{lstlisting}
-git clone \
-  --recurse-submodules \
-  git@github.com:tao-ce/tao-ce.git
-\end{lstlisting}
+        \item[Get code] \, \inputminted{bash}{./snippets/git-clone.sh}
         \item[Enter \devcontainer\notcovered] \, \\
             In Visual Studio Code \\
             \keys{\ctrl + \shift + P} Dev Containers: Reopen in Container
-        \item[Build \& Run] \, \\
-            \begin{lstlisting}
-# Limit scope to lite flavor
-export CE_FLAVOR=lite
-# Build & run TAO CE from devcontainer
-task dev:up
-\end{lstlisting}
+        \item[Build \& Run] \, \inputminted{bash}{./snippets/dev-up.sh}
     \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

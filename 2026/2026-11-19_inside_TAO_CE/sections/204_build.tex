@@ -1,5 +1,6 @@
 \section{Build \taoce}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Process overview}
 \begin{frame}
 \begin{columns}[T]
@@ -29,6 +30,7 @@
 \end{columns}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection<article>{Builder images build process}
 \begin{frame}<article>
     Builder images are built from their \href{https://github.com/tao-ce/tao-ce/blob/main/build/Taskfile.builds.yml}{\texttt{Taskfile.builds.yml}} file.
@@ -41,6 +43,7 @@
     They are kept in local \alert{Podman} registry (e.g \texttt{\scriptsize localhost/tao-ce/builds/base:dev-latest}).
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection<article>{Packages build process}
 \begin{frame}<article>
     \taoce requires some packages to be built locally, and pushed to local registries (Verdaccio \& Satis).
@@ -48,6 +51,7 @@
     Those packages are built from \href{https://github.com/tao-ce/tao-ce/blob/main/packages/Taskfile.yml}{\texttt{Taskfile.yml}} and \href{https://github.com/tao-ce/tao-ce/blob/main/packages/Containerfile.in}{\texttt{Containerfile.in}} files.
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Applications build process}
 \begin{frame}
     Each application is declared as a \href{https://github.com/tao-ce/tao-ce/blob/main/apps/Taskfile.yml\#L43-L58}{\texttt{Taskfile} namespace}. 
@@ -64,6 +68,7 @@
     \end{description}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection<article>{Images build process}
 \begin{frame}<article>
     Once all applications are ready, we can proceed with container image builds.
@@ -77,6 +82,7 @@
     \end{enumerate}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tasks}
 \begin{frame}
     Main tasks:
@@ -91,6 +97,7 @@
     \only<presentation>{More tasks\notcovered are defined by application namespace.}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}<article>
     Each application has also its own set of tasks (e.g. for Portal):
     \begin{description}
@@ -103,16 +110,11 @@
     \end{description}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Logging \& Debug}
-\begin{frame}[fragile]
+\begin{frame}[fragile=singleslide]
 All building logs are forwarded to \texttt{JournalD}
-\begin{lstlisting}[language=bash]
-# Read live logs for Portal building
-journalctl -f TIER=@build APP=portal
-
-# Read live logs for all deliver services
-journalctl -o with-unit -fu tao-ce.deliver\*
-\end{lstlisting}
+\inputminted{bash}{./snippets/journalctl.sh}
 
 \TAOCE services may access the following directories:
 \begin{description}
